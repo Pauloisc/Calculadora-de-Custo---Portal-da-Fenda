@@ -2,11 +2,13 @@ public class Personagem {
     String nome;
     double custoBase;
     double custoEidolon;
+    String tierPersonagem;
 
-    public Personagem(String nome, double custoBase, double custoEidolon) {
+    public Personagem(String nome, double custoBase, double custoEidolon, String tierPersonagem) {
         this.nome = nome;
         this.custoBase = custoBase;
         this.custoEidolon = custoEidolon;
+        this.tierPersonagem = tierPersonagem;
     }
 
     public String getNome() {
@@ -31,5 +33,13 @@ public class Personagem {
 
     public void setCustoEidolon(double custoEidolon) {
         this.custoEidolon = custoEidolon;
+    }
+
+    public String getTierPersonagem() {
+        return tierPersonagem;
+    }
+
+    public void setTierPersonagem(String tierPersonagem) {
+        this.tierPersonagem = tierPersonagem;
     }
 }
