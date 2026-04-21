@@ -1,7 +1,15 @@
 ### IntelliJ IDEA ###
+.idea/
+*.iml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+### Compilados Java ###
+*.class
+*.jar
+*.war
+*.ear
 
 ### Eclipse ###
 .apt_generated
@@ -27,3 +35,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+Desktop.ini
