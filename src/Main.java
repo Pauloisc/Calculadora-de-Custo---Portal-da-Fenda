@@ -14,18 +14,15 @@ public class Main {
             opcoesPerso[i] = listaPersonagens.get(i).getNome();
         }
 
+        // VETORES QUE GUARDARÃO OS DROPDOWNS
         String[] opcoesCone = Utils.lerLinhasDoArquivo("ListaCones.txt");
         JComboBox<String>[] dropdownsPersoT1 = new JComboBox[4];
         JComboBox<String>[] dropdownsPersoT2 = new JComboBox[4];
         JComboBox<String>[] dropdownsConeT1 = new JComboBox[4];
         JComboBox<String>[] dropdownsConeT2 = new JComboBox[4];
 
-        for (int i = 0; i<4; i++){
-            dropdownsPersoT1[i] = new JComboBox<>(opcoesPerso);
-            dropdownsPersoT2[i] = new JComboBox<>(opcoesPerso);
-            dropdownsConeT1[i] = new JComboBox<>(opcoesCone);
-            dropdownsConeT2[i] = new JComboBox<>(opcoesCone);
-        }
+        // PREENCHER CAIXAS DE SELEÇÃO DO PERSONAGEMM E CONE
+        Utils.PreencherDropdowns(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, opcoesPerso, opcoesCone);
 
         // SPINNERS DE EIDOLON E SOBREPOSICAO
         JSpinner[] spinnersEidolonT1 = new JSpinner[4];
@@ -33,20 +30,34 @@ public class Main {
         JSpinner[] spinnersConeT1 = new JSpinner[4];
         JSpinner[] spinnersConeT2 = new JSpinner[4];
 
+        // JLABELS PARA NOMEAR INFORMAÇÕES
+        JLabel labelCustoT1 = new JLabel("Custo: 0.0");
+        JLabel labelCustoT2 = new JLabel("Custo: 0.0");
+
         // CRIAÇÃO DOS PAINÉIS DE SELEÇÃO
         JPanel meuPainel = new JPanel(new GridLayout(1, 2));
         JPanel time1 = new JPanel(new GridLayout(1, 4));
         JPanel time2 = new JPanel(new GridLayout(1, 4));
+        JPanel custoT1 = new JPanel();
+        JPanel custoT2 = new JPanel();
 
+        // PAINEIS INTERMEDIARIOS
+        JPanel ladoT1 = new JPanel(new BorderLayout());
+        JPanel ladoT2 = new JPanel(new BorderLayout());
+
+        // CRIAÇÃO DA BORDA E TEXTOS
         time1.setBorder(BorderFactory.createTitledBorder("Time 1"));
         time2.setBorder(BorderFactory.createTitledBorder("Time 2"));
+        custoT1.add(labelCustoT1);
+        custoT2.add(labelCustoT2);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
         Utils.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1, spinnersEidolonT2, spinnersConeT1, spinnersConeT2, time1, time2);
-    //  String selecionado = (String) dropdowns[i].getSelectedItem();
-        meuPainel.add(time1);
-        meuPainel.add(time2);
 
+        // ADICIONA AS INFORMAÇÕES DO TIME NO PAINEL PRINCIPAL
+        Utils.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
+
+        // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.NORTH);
         janela.setVisible(true);
     }

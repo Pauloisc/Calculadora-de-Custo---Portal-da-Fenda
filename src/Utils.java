@@ -49,6 +49,17 @@ public class Utils {
         return lista;
     }
 
+    public static void PreencherDropdowns(JComboBox<String>[] dropdownsPersoT1, JComboBox<String>[] dropdownsPersoT2,
+                                          JComboBox<String>[] dropdownsConeT1, JComboBox<String>[] dropdownsConeT2,
+                                          String[] opcoesPerso, String[] opcoesCone){
+        for (int i = 0; i<4; i++){
+            dropdownsPersoT1[i] = new JComboBox<>(opcoesPerso);
+            dropdownsPersoT2[i] = new JComboBox<>(opcoesPerso);
+            dropdownsConeT1[i] = new JComboBox<>(opcoesCone);
+            dropdownsConeT2[i] = new JComboBox<>(opcoesCone);
+        }
+    }
+
     // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON
     // -> CONE DE LUZ -> SOBREPOSICAO
     public static void CriarSlots(JComboBox<String>[] dropdownsPersoT1, JComboBox<String>[] dropdownsPersoT2,
@@ -70,4 +81,24 @@ public class Utils {
             time2.add(slot2);
         }
     }
+
+    public static void InfoTimesPainel (JPanel ladoT1, JPanel ladoT2, JPanel time1, JPanel time2, JPanel meuPainel,
+                                        JPanel custoT1, JPanel custoT2){
+        ladoT1.add(time1, BorderLayout.NORTH);
+        ladoT1.add(custoT1, BorderLayout.WEST);
+        ladoT2.add(time2, BorderLayout.NORTH);
+        ladoT2.add(custoT2, BorderLayout.WEST);
+        meuPainel.add(ladoT1);
+        meuPainel.add(ladoT2);
+    }
+
+    public static double calcularCusto(JComboBox<String>[] dropdownsPerso, JSpinner[] spinnersEidolon,
+                                       List<Personagem> listaPersonagens){
+        double total = 0.0;
+        for (int i = 0; i<4; i++){
+            //dropdownsPerso[i]
+        }
+        return total;
+    }
+
 }
