@@ -22,7 +22,7 @@ public class Main {
         JComboBox<String>[] dropdownsConeT2 = new JComboBox[4];
 
         // PREENCHER CAIXAS DE SELEÇÃO DO PERSONAGEMM E CONE
-        Utils.PreencherDropdowns(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, opcoesPerso, opcoesCone);
+        FuncoesPainel.PreencherDropdowns(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, opcoesPerso, opcoesCone);
 
         // SPINNERS DE EIDOLON E SOBREPOSICAO
         JSpinner[] spinnersEidolonT1 = new JSpinner[4];
@@ -46,16 +46,13 @@ public class Main {
         JPanel ladoT2 = new JPanel(new BorderLayout());
 
         // CRIAÇÃO DA BORDA E TEXTOS
-        time1.setBorder(BorderFactory.createTitledBorder("Time 1"));
-        time2.setBorder(BorderFactory.createTitledBorder("Time 2"));
-        custoT1.add(labelCustoT1);
-        custoT2.add(labelCustoT2);
+        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
-        Utils.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1, spinnersEidolonT2, spinnersConeT1, spinnersConeT2, time1, time2);
+        FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1, spinnersEidolonT2, spinnersConeT1, spinnersConeT2, time1, time2);
 
         // ADICIONA AS INFORMAÇÕES DO TIME NO PAINEL PRINCIPAL
-        Utils.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
+        FuncoesPainel.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
 
         // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.NORTH);
