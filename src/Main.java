@@ -30,9 +30,12 @@ public class Main {
         JSpinner[] spinnersConeT1 = new JSpinner[4];
         JSpinner[] spinnersConeT2 = new JSpinner[4];
 
-        // JLABELS PARA NOMEAR INFORMAÇÕES
+        // JLABELS PARA NOMEAR CUSTO
         JLabel labelCustoT1 = new JLabel("Custo: 0.0");
         JLabel labelCustoT2 = new JLabel("Custo: 0.0");
+
+        // ATUALIZACAO EM TEMPO REAL DO CUSTO
+
 
         // CRIAÇÃO DOS PAINÉIS DE SELEÇÃO
         JPanel meuPainel = new JPanel(new GridLayout(1, 2));
@@ -53,6 +56,10 @@ public class Main {
 
         // ADICIONA AS INFORMAÇÕES DO TIME NO PAINEL PRINCIPAL
         FuncoesPainel.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
+
+        // ADICIONA O CALCULO DO CUSTO EM TEMPO REAL
+        FuncoesPainel.custoTotal(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens, dropdownsConeT1, spinnersConeT1, labelCustoT1);
+        FuncoesPainel.custoTotal(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens, dropdownsConeT2, spinnersConeT2, labelCustoT2);
 
         // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.NORTH);

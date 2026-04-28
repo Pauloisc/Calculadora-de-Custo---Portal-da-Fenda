@@ -59,11 +59,78 @@ public class FuncoesPainel {
     // CALCULO DO CUSTO (CORAÇÃO DO SOFTWARE)
     public static double calcularCusto(JComboBox<String>[] dropdownsPerso, JSpinner[] spinnersEidolon,
                                        List<Personagem> listaPersonagens){
-        double total = 0.0;
+        double custo = 0.0;
         for (int i = 0; i<4; i++){
-            //dropdownsPerso[i]
+            String nomeSelecionado = (String) dropdownsPerso[i].getSelectedItem();
+            for (Personagem PersoSelecionado : listaPersonagens){
+                if ((PersoSelecionado.getNome()).equals(nomeSelecionado)){
+                    custo = custo + PersoSelecionado.getCustoBase() + (PersoSelecionado.getCustoEidolon() * (int) spinnersEidolon[i].getValue());
+                }
+            }
         }
-        return total;
+        return custo;
     }
+
+    public static void custoPersonagem(JComboBox<String>[] dropdownsPerso, JSpinner[] spinnersEidolon,
+                                           List<Personagem> listaPersonagens, JLabel labelCusto) {
+        for (int i = 0; i < 4; i++) {
+            dropdownsPerso[i].addActionListener(e -> {
+                double novoCusto = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                labelCusto.setText("Custo: " + novoCusto);
+            });
+
+            spinnersEidolon[i].addChangeListener(e -> {
+                double novoCusto = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                labelCusto.setText("Custo: " + novoCusto);
+            });
+        }
+    }
+
+    public static void custoTotal(JComboBox<String>[] dropdownsPerso, JSpinner[] spinnersEidolon,
+                                  List<Personagem> listaPersonagens, JComboBox<String>[] dropdownsCone,
+                                  JSpinner[] spinnersCone, JLabel labelCusto) {
+
+        for (int i = 0; i < 4; i++) {
+            dropdownsPerso[i].addActionListener(e -> {
+                double total = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                total += calcularExtraCones(dropdownsCone, spinnersCone);
+                labelCusto.setText("Custo: " + total);
+            });
+
+            spinnersEidolon[i].addChangeListener(e -> {
+                double total = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                total += calcularExtraCones(dropdownsCone, spinnersCone);
+                labelCusto.setText("Custo: " + total);
+            });
+
+            dropdownsCone[i].addActionListener(e -> {
+                double total = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                total += calcularExtraCones(dropdownsCone, spinnersCone);
+                labelCusto.setText("Custo: " + total);
+            });
+
+            spinnersCone[i].addChangeListener(e -> {
+                double total = calcularCusto(dropdownsPerso, spinnersEidolon, listaPersonagens);
+                total += calcularExtraCones(dropdownsCone, spinnersCone);
+                labelCusto.setText("Custo: " + total);
+            });
+        }
+    }
+
+    public static double calcularExtraCones(JComboBox<String>[] dropdownsCone, JSpinner[] spinnersCone) {
+        double extra = 0;
+        for (int j = 0; j < 4; j++) {
+            String nomeCone = (String) dropdownsCone[j].getSelectedItem();
+            int sobreposicao = (int) spinnersCone[j].getValue();
+            if (nomeCone.contains("T5")) {
+                extra += 1.0 + (0.25 * sobreposicao);
+            }
+            else if (nomeCone.contains("T3")) {
+                extra -= 1.0;
+            }
+        }
+        return extra;
+    }
+
 
 }
