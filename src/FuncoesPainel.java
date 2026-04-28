@@ -123,7 +123,7 @@ public class FuncoesPainel {
             String nomeCone = (String) dropdownsCone[j].getSelectedItem();
             int sobreposicao = (int) spinnersCone[j].getValue();
             if (nomeCone.contains("T5")) {
-                extra += 1.0 + (0.2 * sobreposicao);
+                extra += 1.0 + (0.25 * sobreposicao);
             }
             else if (nomeCone.contains("T3")) {
                 extra -= 1.0;
