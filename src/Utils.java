@@ -33,17 +33,23 @@ public class Utils {
                     // custoBase e custoEidolon serão definidos futuramente com base na tier
                     if (Objects.equals(tier, "Error")) {
                         lista.add(new Personagem(nome, 1.5, 2, tier));
-                    } else if (Objects.equals(tier, "PilaresDoMeta")) {
+                    }
+                    else if (Objects.equals(tier, "PilaresDoMeta")) {
                         lista.add(new Personagem(nome, 1, 1.5, tier));
-                    } else if (Objects.equals(tier, "Brilhantes")) {
+                    }
+                    else if (Objects.equals(tier, "Brilhantes")) {
                         lista.add(new Personagem(nome, 0.5, 1, tier));
-                    } else if (Objects.equals(tier, "Coringas")) {
+                    }
+                    else if (Objects.equals(tier, "Coringas")) {
                         lista.add(new Personagem(nome, 0, 0.5, tier));
-                    } else if (Objects.equals(tier, "Neutros")) {
+                    }
+                    else if (Objects.equals(tier, "Neutros")) {
                         lista.add(new Personagem(nome, 0.0, 0, tier));
-                    } else if (Objects.equals(tier, "QuebraGalho")) {
-                        lista.add(new Personagem(nome, 0.0, 0, tier));
-                    }else if (Objects.equals(tier, "FundoDoPoço")) {
+                    }
+                    else if (Objects.equals(tier, "QuebraGalho")) {
+                        lista.add(new Personagem(nome, -0.5, 0, tier));
+                    }
+                    else if (Objects.equals(tier, "FundoDoPoço")) {
                         lista.add(new Personagem(nome, -1, 0, tier));
                     }
                 }

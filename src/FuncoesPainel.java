@@ -130,7 +130,10 @@ public class FuncoesPainel {
                 extra += 1.0 + (0.25 * sobreposicao);
             }
             else if (nomeCone.contains("T3")) {
-                extra -= 1.0;
+                extra -= 0.5;
+            }
+            else if (nomeCone.contains("Nada")) {
+                extra -= 1;
             }
         }
         return extra;
