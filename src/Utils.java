@@ -11,7 +11,7 @@ public class Utils {
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                if (!linha.isBlank()) {
+                if (!linha.trim().isEmpty()) {
                     linhas.add(linha.trim());
                 }
             }
@@ -26,7 +26,7 @@ public class Utils {
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                if (!linha.isBlank()) {
+                if (!linha.trim().isEmpty()) {
                     String[] partes = linha.trim().split(",");
                     String nome = partes[0];
                     String tier = partes[1];

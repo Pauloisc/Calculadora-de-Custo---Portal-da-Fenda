@@ -28,10 +28,14 @@ public class FuncoesPainel {
     public static void CriarSlots(JComboBox<String>[] dropdownsPersoT1, JComboBox<String>[] dropdownsPersoT2,
             JComboBox<String>[] dropdownsConeT1, JComboBox<String>[] dropdownsConeT2,
             JSpinner[] spinnersEidolonT1, JSpinner[] spinnersEidolonT2, JSpinner[] spinnersConeT1,
-            JSpinner[] spinnersConeT2, JPanel time1, JPanel time2) {
+            JSpinner[] spinnersConeT2, JPanel time1, JPanel time2, JLabel[] labelsImagemT1, JLabel[] labelsImagemT2) {
         for (int i = 0; i < 4; i++) {
-            JPanel slot1 = new JPanel(new GridLayout(4, 1));
-            JPanel slot2 = new JPanel(new GridLayout(4, 1));
+            labelsImagemT1[i] = new JLabel();
+            labelsImagemT2[i] = new JLabel();
+            JPanel slot1 = new JPanel(new GridLayout(5, 1));
+            JPanel slot2 = new JPanel(new GridLayout(5, 1));
+            slot1.add(labelsImagemT1[i]);
+            slot2.add(labelsImagemT2[i]);
             slot1.add(dropdownsPersoT1[i]);
             slot2.add(dropdownsPersoT2[i]);
             slot1.add(spinnersEidolonT1[i] = new JSpinner(new SpinnerNumberModel(0, 0, 6, 1)));

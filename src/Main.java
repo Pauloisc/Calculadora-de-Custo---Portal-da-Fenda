@@ -14,12 +14,14 @@ public class Main {
             opcoesPerso[i] = listaPersonagens.get(i).getNome();
         }
 
-        // VETORES QUE GUARDARÃO OS DROPDOWNS
+        // VETORES QUE GUARDARÃO INFORMAÇÕES
         String[] opcoesCone = Utils.lerLinhasDoArquivo("ListaCones.txt");
         JComboBox<String>[] dropdownsPersoT1 = new JComboBox[4];
         JComboBox<String>[] dropdownsPersoT2 = new JComboBox[4];
         JComboBox<String>[] dropdownsConeT1 = new JComboBox[4];
         JComboBox<String>[] dropdownsConeT2 = new JComboBox[4];
+        JLabel[] labelsImagemT1 = new JLabel[4];
+        JLabel[] labelsImagemT2 = new JLabel[4];
 
         // PREENCHER CAIXAS DE SELEÇÃO DO PERSONAGEMM E CONE
         FuncoesPainel.PreencherDropdowns(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, opcoesPerso, opcoesCone);
@@ -52,7 +54,8 @@ public class Main {
         FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
-        FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1, spinnersEidolonT2, spinnersConeT1, spinnersConeT2, time1, time2);
+        FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1,
+                spinnersEidolonT2, spinnersConeT1, spinnersConeT2, time1, time2, labelsImagemT1, labelsImagemT2);
 
         // ADICIONA AS INFORMAÇÕES DO TIME NO PAINEL PRINCIPAL
         FuncoesPainel.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
