@@ -35,23 +35,22 @@ public class Main {
         // JLABELS PARA NOMEAR CUSTO
         JLabel labelCustoT1 = new JLabel("Custo: 0.0");
         JLabel labelCustoT2 = new JLabel("Custo: 0.0");
-
-        // ATUALIZACAO EM TEMPO REAL DO CUSTO
-
+        JLabel labelCustoTotal = new JLabel("Custo Total: 0.0");
 
         // CRIAÇÃO DOS PAINÉIS DE SELEÇÃO
         JPanel meuPainel = new JPanel(new GridLayout(2, 1, 10, 10));
         JPanel time1 = new JPanel(new GridLayout(1, 4));
         JPanel time2 = new JPanel(new GridLayout(1, 4));
         JPanel custoT1 = new JPanel();
-        JPanel custoT2 = new JPanel();
+        JPanel custoT2 = new JPanel(new GridLayout(2, 1));
+        JPanel custoTotal = new JPanel();
 
         // PAINEIS INTERMEDIARIOS
         JPanel ladoT1 = new JPanel(new BorderLayout());
         JPanel ladoT2 = new JPanel(new BorderLayout());
 
         // CRIAÇÃO DA BORDA E TEXTOS
-        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2);
+        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2, labelCustoTotal);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
         FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1,
@@ -61,8 +60,8 @@ public class Main {
         FuncoesPainel.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
 
         // ADICIONA O CALCULO DO CUSTO EM TEMPO REAL
-        FuncoesPainel.custoTotal(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens, dropdownsConeT1, spinnersConeT1, labelCustoT1);
-        FuncoesPainel.custoTotal(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens, dropdownsConeT2, spinnersConeT2, labelCustoT2);
+        FuncoesPainel.custoComposicoes(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1, labelCustoT1,
+                dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal);
 
         // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.NORTH);
