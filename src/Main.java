@@ -66,10 +66,10 @@ public class Main {
 
         // ADICIONA O CALCULO DO CUSTO EM TEMPO REAL
         FuncoesPainel.custoComposicoes(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1, labelCustoT1,
-                dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal);
+                dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal, labelsImagemT1, labelsImagemT2);
 
         // CONFIGS DA JANELA
-        janela.add(meuPainel, BorderLayout.NORTH);
+        janela.add(meuPainel, BorderLayout.CENTER);
         janela.setVisible(true);
     }
 }

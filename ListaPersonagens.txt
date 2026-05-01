@@ -1,36 +1,37 @@
 ---,Neutros
 Nada,FundoDoPoco
 Acheron,Coringas
-Aglaea,Coringas
-Anaxa,Brilhantes
-Archer,Coringas
+Aglaea,PilaresDoMeta
+Anaxa,PilaresDoMeta
+Archer,Brilhantes
 Argenti,Neutros
-Ashveil,Brilhantes
+Ashveil,Error
 Aventurine,Coringas
 Bailu,Neutros
 Black Swan,PilaresDoMeta
 Blade,Coringas
-Boothill,Neutros
+Boothill,Coringas
 Bronya,Neutros
 Castorice,Brilhantes
 Cerydra,Brilhantes
 Cipher,Brilhantes
 Clara,Neutros
 Cyrene,PilaresDoMeta
-Dhil,Coringas
-DHPT,Neutros
-Dr Ratio,QuebraGalho
+DHIL,Coringas
+DHPT,Brilhantes
+Dr Ratio,Neutros
+Evanescia,PilaresDoMeta
 Evernight,PilaresDoMeta
 Feixiao,Coringas
-Firefly,Brilhantes
+Firefly,PilaresDoMeta
 Fu Xuan,Neutros
-Fugue,PilaresDoMeta
+Fugue,Brilhantes
 Gepard,Neutros
-Himeko,Coringas
-Huohuo,Coringas
+Himeko,Neutros
+Huohuo,Brilhantes
 Hyacine,PilaresDoMeta
 Hysilens,PilaresDoMeta
-Jade,Brilhantes
+Jade,Neutros
 Jiaoqiu,Coringas
 Jing Yuan,Neutros
 Jingliu,Coringas
@@ -38,44 +39,46 @@ Kafka,Brilhantes
 Lingsha,Brilhantes
 Luocha,Neutros
 Mydei,Coringas
-Phainon,PilaresDoMeta
-Rappa,Brilhantes
+Phainon,Brilhantes
+Rappa,Coringas
 Robin,Coringas
-Ruan Mei,Coringas
+Ruan Mei,Neutros
 Saber,Brilhantes
-Seele,QuebraGalho
+Seele,Brilhantes
 Silver Wolf,Coringas
+Silver Wolf 999,Error
 Sparkle,PilaresDoMeta
 Sparxie,PilaresDoMeta
 Sunday,Brilhantes
-The Dahlia,PilaresDoMeta
-The Herta,QuebraGalho
-Topaz & Numby,QuebraGalho
+The Dahlia,Error
+The Herta,PilaresDoMeta
+Topaz & Numby,Neutros
 Trailblazer,Neutros
 Tribbie,PilaresDoMeta
-Welt,Neutros
-Yanqing,FundoDoPoco
-Yao Guang,PilaresDoMeta
+Welt,Brilhantes
+Yanqing,QuebraGalho
+Yao Guang,Error
 Yunli,Coringas
 Arlan,FundoDoPoco
 Asta,QuebraGalho
 Dan Heng,FundoDoPoco
 Gallagher,QuebraGalho
 Guinaifen,FundoDoPoco
-Hanya,FundoDoPoco
+Hanya,QuebraGalho
 Herta,QuebraGalho
 Hook,FundoDoPoco
-Luka,QuebraGalho
+Luka,FundoDoPoco
 Lynx,QuebraGalho
-Marco,QuebraGalho
+Marco Caca,QuebraGalho
+Marco Preservacao,FundoDoPoco
 Misha,FundoDoPoco
 Moze,FundoDoPoco
 Natasha,FundoDoPoco
 Pela,QuebraGalho
-Qingque,FundoDoPoco
+Qingque,QuebraGalho
 Sampo,QuebraGalho
 Serval,QuebraGalho
 Sushang,FundoDoPoco
 Tingyun,QuebraGalho
 Xueyi,FundoDoPoco
-Yukong,QuebraGalho
+Yukong,FundoDoPoco

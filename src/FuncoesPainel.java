@@ -35,8 +35,16 @@ public class FuncoesPainel {
         for (int i = 0; i < 4; i++) {
             labelsImagemT1[i] = new JLabel();
             labelsImagemT2[i] = new JLabel();
-            JPanel slot1 = new JPanel(new GridLayout(5, 1));
-            JPanel slot2 = new JPanel(new GridLayout(5, 1));
+            labelsImagemT1[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+            dropdownsPersoT1[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+            labelsImagemT2[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+            dropdownsPersoT2[i].setAlignmentX(Component.CENTER_ALIGNMENT);
+            labelsImagemT1[i].setPreferredSize(new Dimension(120, 120));
+            labelsImagemT2[i].setPreferredSize(new Dimension(120, 120));
+            JPanel slot1 = new JPanel();
+            slot1.setLayout(new BoxLayout(slot1, BoxLayout.Y_AXIS));
+            JPanel slot2 = new JPanel();
+            slot2.setLayout(new BoxLayout(slot2, BoxLayout.Y_AXIS));
             slot1.add(labelsImagemT1[i]);
             slot2.add(labelsImagemT2[i]);
             slot1.add(dropdownsPersoT1[i]);
@@ -127,16 +135,19 @@ public class FuncoesPainel {
                                         JSpinner[] spinnersEidolonT1, JComboBox<String>[] dropdownsConeT1, JSpinner[] spinnersConeT1,
                                         JLabel labelCustoT1, JComboBox<String>[] dropdownsPersoT2, JSpinner[] spinnersEidolonT2,
                                         JComboBox<String>[] dropdownsConeT2, JSpinner[] spinnersConeT2, JLabel labelCustoT2,
-                                        JLabel labelCustoTotal) {
+                                        JLabel labelCustoTotal, JLabel[] labelsImagemT1, JLabel[] labelsImagemT2) {
 
         for (int i = 0; i < 4; i++) {
             double soma = 0.0;
+            int finalI = i;
             dropdownsPersoT1[i].addActionListener(e -> {
                 double total = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
                 total += calcularExtraCones(dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal));
+                String nomeSelecionado = (String) dropdownsPersoT1[finalI].getSelectedItem();
+                atualizarRetrato(nomeSelecionado, labelsImagemT1[finalI]);
             });
 
             spinnersEidolonT1[i].addChangeListener(e -> {
@@ -168,6 +179,8 @@ public class FuncoesPainel {
                 labelCustoT2.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal));
+                String nomeSelecionado = (String) dropdownsPersoT2[finalI].getSelectedItem();
+                atualizarRetrato(nomeSelecionado, labelsImagemT2[finalI]);
             });
 
             spinnersEidolonT2[i].addChangeListener(e -> {
@@ -216,6 +229,17 @@ public class FuncoesPainel {
                 dropdownPerso.setPopupVisible(true);
             }
         });
+    }
+
+    public static void atualizarRetrato(String nome, JLabel quadro){
+        String caminho = "Fotos personagens/" + nome + ".png";
+        ImageIcon iconePersonagem = new ImageIcon("Fotos personagens/" + nome + ".png");
+        Image imagemOriginal = iconePersonagem.getImage();
+        Image imagemPequena = imagemOriginal.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        ImageIcon fotoFinal = new ImageIcon(imagemPequena);
+        quadro.setIcon(fotoFinal);
+        quadro.revalidate();
+        quadro.repaint();
     }
 
 }
