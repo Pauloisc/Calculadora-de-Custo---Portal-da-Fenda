@@ -32,7 +32,7 @@ public class Utils {
                     String tier = partes[1];
                     // custoBase e custoEidolon serão definidos futuramente com base na tier
                     if (Objects.equals(tier, "Error")) {
-                        lista.add(new Personagem(nome, 1.5, 2, tier));
+                        lista.add(new Personagem(nome, 2, 1.5, tier));
                     }
                     else if (Objects.equals(tier, "PilaresDoMeta")) {
                         lista.add(new Personagem(nome, 1, 1.5, tier));
@@ -51,6 +51,9 @@ public class Utils {
                     }
                     else if (Objects.equals(tier, "FundoDoPoco")) {
                         lista.add(new Personagem(nome, -1, 0, tier));
+                    }
+                    else if (Objects.equals(tier, "Nada")) {
+                        lista.add(new Personagem(nome, -1.5, 0, tier));
                     }
                 }
             }

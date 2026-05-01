@@ -1,5 +1,5 @@
 ---,Neutros
-Nada,FundoDoPoco
+Nada,Nada
 Acheron,Coringas
 Aglaea,PilaresDoMeta
 Anaxa,PilaresDoMeta

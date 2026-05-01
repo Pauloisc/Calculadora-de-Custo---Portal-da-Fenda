@@ -53,8 +53,8 @@ public class FuncoesPainel {
             slot2.add(spinnersEidolonT2[i] = new JSpinner(new SpinnerNumberModel(0, 0, 6, 1)));
             slot1.add(dropdownsConeT1[i]);
             slot2.add(dropdownsConeT2[i]);
-            slot1.add(spinnersConeT1[i] = new JSpinner(new SpinnerNumberModel(0, 0, 5, 1)));
-            slot2.add(spinnersConeT2[i] = new JSpinner(new SpinnerNumberModel(0, 0, 5, 1)));
+            slot1.add(spinnersConeT1[i] = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
+            slot2.add(spinnersConeT2[i] = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
             time1.add(slot1);
             time2.add(slot2);
         }
@@ -92,7 +92,8 @@ public class FuncoesPainel {
             String nomeCone = (String) dropdownsCone[j].getSelectedItem();
             int sobreposicao = (int) spinnersCone[j].getValue();
             if (nomeCone.contains("T5")) {
-                extra += 1.0 + (0.25 * sobreposicao);
+                if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
+                else{extra += 1.0;}
             }
             else if (nomeCone.contains("T3")) {
                 extra -= 0.5;
