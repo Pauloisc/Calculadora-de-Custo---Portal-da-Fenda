@@ -10,7 +10,9 @@ public class FuncoesPainel {
                                           String[] opcoesPerso, String[] opcoesCone){
         for (int i = 0; i<4; i++){
             dropdownsPersoT1[i] = new JComboBox<>(opcoesPerso);
+            configurarBuscaDropdown(dropdownsPersoT1[i], opcoesPerso);
             dropdownsPersoT2[i] = new JComboBox<>(opcoesPerso);
+            configurarBuscaDropdown(dropdownsPersoT2[i], opcoesPerso);
             dropdownsConeT1[i] = new JComboBox<>(opcoesCone);
             dropdownsConeT2[i] = new JComboBox<>(opcoesCone);
         }
@@ -193,4 +195,27 @@ public class FuncoesPainel {
             });
         }
     }
+
+    public static void configurarBuscaDropdown(JComboBox<String> dropdownPerso, String[] listaPersonagens) {
+        dropdownPerso.setEditable(true);
+        JTextField textoEditor = (JTextField) dropdownPerso.getEditor().getEditorComponent();
+
+        textoEditor.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                String digitado = textoEditor.getText();
+
+                dropdownPerso.removeAllItems();
+
+                for (String item : listaPersonagens) {
+                    if (item.toLowerCase().contains(digitado.toLowerCase())) {
+                        dropdownPerso.addItem(item);
+                    }
+                }
+                textoEditor.setText(digitado);
+                dropdownPerso.setPopupVisible(true);
+            }
+        });
+    }
+
 }
