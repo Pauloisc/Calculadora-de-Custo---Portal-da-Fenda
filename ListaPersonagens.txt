@@ -1,5 +1,5 @@
 ---,Neutros
-Nada,FundoDoPoço
+Nada,FundoDoPoco
 Acheron,Coringas
 Aglaea,Coringas
 Anaxa,Brilhantes
@@ -54,28 +54,28 @@ Topaz & Numby,QuebraGalho
 Trailblazer,Neutros
 Tribbie,PilaresDoMeta
 Welt,Neutros
-Yanqing,FundoDoPoço
+Yanqing,FundoDoPoco
 Yao Guang,PilaresDoMeta
 Yunli,Coringas
-Arlan,FundoDoPoço
+Arlan,FundoDoPoco
 Asta,QuebraGalho
-Dan Heng,FundoDoPoço
+Dan Heng,FundoDoPoco
 Gallagher,QuebraGalho
-Guinaifen,FundoDoPoço
-Hanya,FundoDoPoço
+Guinaifen,FundoDoPoco
+Hanya,FundoDoPoco
 Herta,QuebraGalho
-Hook,FundoDoPoço
+Hook,FundoDoPoco
 Luka,QuebraGalho
 Lynx,QuebraGalho
 Marco,QuebraGalho
-Misha,FundoDoPoço
-Moze,FundoDoPoço
-Natasha,FundoDoPoço
+Misha,FundoDoPoco
+Moze,FundoDoPoco
+Natasha,FundoDoPoco
 Pela,QuebraGalho
-Qingque,FundoDoPoço
+Qingque,FundoDoPoco
 Sampo,QuebraGalho
 Serval,QuebraGalho
-Sushang,FundoDoPoço
+Sushang,FundoDoPoco
 Tingyun,QuebraGalho
-Xueyi,FundoDoPoço
+Xueyi,FundoDoPoco
 Yukong,QuebraGalho

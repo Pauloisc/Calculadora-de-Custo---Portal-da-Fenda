@@ -49,7 +49,7 @@ public class Utils {
                     else if (Objects.equals(tier, "QuebraGalho")) {
                         lista.add(new Personagem(nome, -0.5, 0, tier));
                     }
-                    else if (Objects.equals(tier, "FundoDoPoço")) {
+                    else if (Objects.equals(tier, "FundoDoPoco")) {
                         lista.add(new Personagem(nome, -1, 0, tier));
                     }
                 }

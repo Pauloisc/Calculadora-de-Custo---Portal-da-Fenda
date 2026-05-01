@@ -40,7 +40,7 @@ public class Main {
 
 
         // CRIAÇÃO DOS PAINÉIS DE SELEÇÃO
-        JPanel meuPainel = new JPanel(new GridLayout(1, 2));
+        JPanel meuPainel = new JPanel(new GridLayout(2, 1, 10, 10));
         JPanel time1 = new JPanel(new GridLayout(1, 4));
         JPanel time2 = new JPanel(new GridLayout(1, 4));
         JPanel custoT1 = new JPanel();
