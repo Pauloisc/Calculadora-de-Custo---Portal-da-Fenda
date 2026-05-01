@@ -91,11 +91,11 @@ public class FuncoesPainel {
         for (int j = 0; j < 4; j++) {
             String nomeCone = (String) dropdownsCone[j].getSelectedItem();
             int sobreposicao = (int) spinnersCone[j].getValue();
-            if (nomeCone.contains("T5")) {
+            if (nomeCone.contains("Cone T5")) {
                 if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
                 else{extra += 1.0;}
             }
-            else if (nomeCone.contains("T3")) {
+            else if (nomeCone.contains("Cone T3")) {
                 extra -= 0.5;
             }
             else if (nomeCone.contains("Nada")) {
