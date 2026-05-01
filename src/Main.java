@@ -37,6 +37,11 @@ public class Main {
         JLabel labelCustoT2 = new JLabel("Custo: 0.0");
         JLabel labelCustoTotal = new JLabel("Custo Total: 0.0");
 
+        // INFORMAÇÕES VISUAIS DO JLABEL
+        labelCustoT1.setFont(new Font("Arial", Font.BOLD, 13));
+        labelCustoT2.setFont(new Font("Arial", Font.BOLD, 13));
+        labelCustoTotal.setFont(new Font("Arial", Font.BOLD, 15));
+
         // CRIAÇÃO DOS PAINÉIS DE SELEÇÃO
         JPanel meuPainel = new JPanel(new GridLayout(2, 1, 10, 10));
         JPanel time1 = new JPanel(new GridLayout(1, 4));
