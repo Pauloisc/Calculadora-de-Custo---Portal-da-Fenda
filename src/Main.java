@@ -32,6 +32,10 @@ public class Main {
         JSpinner[] spinnersConeT1 = new JSpinner[4];
         JSpinner[] spinnersConeT2 = new JSpinner[4];
 
+        // SPINNER PARA CUSTO ADICIONAL
+        JSpinner[] spinnerCustoTotalAdicional = new JSpinner[1];
+        spinnerCustoTotalAdicional[0] = new JSpinner(new SpinnerNumberModel(0, -100, 100, 1));
+
         // JLABELS PARA NOMEAR CUSTO
         JLabel labelCustoT1 = new JLabel("Custo: 0.0");
         JLabel labelCustoT2 = new JLabel("Custo: 0.0");
@@ -55,7 +59,8 @@ public class Main {
         JPanel ladoT2 = new JPanel(new BorderLayout());
 
         // CRIAÇÃO DA BORDA E TEXTOS
-        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2, labelCustoTotal);
+        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2,
+                labelCustoTotal, spinnerCustoTotalAdicional);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
         FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1,
@@ -66,7 +71,8 @@ public class Main {
 
         // ADICIONA O CALCULO DO CUSTO EM TEMPO REAL
         FuncoesPainel.custoComposicoes(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1, labelCustoT1,
-                dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal, labelsImagemT1, labelsImagemT2);
+                dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal, labelsImagemT1, labelsImagemT2,
+                spinnerCustoTotalAdicional);
 
         // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.CENTER);
