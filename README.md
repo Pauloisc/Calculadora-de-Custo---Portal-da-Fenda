@@ -27,9 +27,9 @@ O sistema categoriza os personagens por tier de relevância no meta do jogo e pe
 
 | Tier | Descrição |
 |------|-----------|
-| `Error` | Classificação especial / fora do padrão |
-| `PilaresDoMeta` | Os melhores do jogo atualmente |
-| `Brilhantes` | Excelentes, muito fortes |
+| `Error` | | Os melhores do jogo atualmente |
+| `PilaresDoMeta` | Excelentes, muito fortes |
+| `Brilhantes` | Fortes, mas que exigem de certas estratégias |
 | `Coringas` | Versáteis, funcionam em vários times |
 | `Neutros` | Sólidos, cumprem o papel |
 | `QuebraGalho` | Servem em situações específicas |
