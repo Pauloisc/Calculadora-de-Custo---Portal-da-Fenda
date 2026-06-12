@@ -50,7 +50,7 @@ public class CalculadoraCustos {
         double personagensT2 = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
         double conesT1 = calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
         double conesT2 = calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
-        double extra = (Integer) spinnerCustoTotalAdicional[0].getValue();
+        double extra = (Double) spinnerCustoTotalAdicional[0].getValue();
         double custoTimes = personagensT1 + personagensT2 + conesT1 + conesT2 + extra;
         if (custoTimes < 0) {
             labelCustoTotal.setForeground(Color.magenta);

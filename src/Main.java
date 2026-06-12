@@ -34,7 +34,7 @@ public class Main {
 
         // SPINNER PARA CUSTO ADICIONAL
         JSpinner[] spinnerCustoTotalAdicional = new JSpinner[1];
-        spinnerCustoTotalAdicional[0] = new JSpinner(new SpinnerNumberModel(0, -100, 100, 1));
+        spinnerCustoTotalAdicional[0] = new JSpinner(new SpinnerNumberModel(0.0, -100.0, 100.0, 0.5));
 
         // BOTÃO PARA SALVAR,CARREGAR OU LIMPAR TIME
         JButton botaoSalvarT1 = new JButton("Salvar Time");
