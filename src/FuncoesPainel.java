@@ -10,24 +10,39 @@ public class FuncoesPainel {
                                           String[] opcoesPerso, String[] opcoesCone){
         for (int i = 0; i<4; i++){
             dropdownsPersoT1[i] = new JComboBox<>(opcoesPerso);
+            dropdownsPersoT1[i].setSelectedItem("");
             configurarBuscaDropdown(dropdownsPersoT1[i], opcoesPerso);
             dropdownsPersoT2[i] = new JComboBox<>(opcoesPerso);
+            dropdownsPersoT2[i].setSelectedItem("");
             configurarBuscaDropdown(dropdownsPersoT2[i], opcoesPerso);
             dropdownsConeT1[i] = new JComboBox<>(opcoesCone);
             dropdownsConeT2[i] = new JComboBox<>(opcoesCone);
         }
     }
 
-    public static void BordasTexto (JPanel time1, JPanel time2, JPanel custoT1, JPanel custoT2,
+    public static void PosicionarBotoes (JPanel time1, JPanel time2, JPanel custoT1, JPanel custoT2,
                                     JLabel labelCustoT1, JLabel labelCustoT2, JLabel labelCustoTotal,
-                                    JSpinner[] spinnerCustoTotalAdicional){
+                                    JSpinner[] spinnerCustoTotalAdicional, JButton botaoSalvarT1, JButton botaoCarregarT1,
+                                         JButton botaoSalvarT2, JButton botaoCarregarT2){
         time1.setBorder(BorderFactory.createTitledBorder("Time 1"));
         time2.setBorder(BorderFactory.createTitledBorder("Time 2"));
-        custoT1.add(labelCustoT1);
-        custoT2.add(labelCustoT2);
+
+        custoT1.add(labelCustoT1, BorderLayout.WEST);
+        JPanel painelBotoesT1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        painelBotoesT1.add(botaoSalvarT1);
+        painelBotoesT1.add(botaoCarregarT1);
+        custoT1.add(painelBotoesT1, BorderLayout.EAST);
+
         JPanel subPainel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         subPainel.add(labelCustoTotal);
         subPainel.add(spinnerCustoTotalAdicional[0]);
+        JPanel painelBotoesT2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        painelBotoesT2.add(botaoSalvarT2);
+        painelBotoesT2.add(botaoCarregarT2);
+        JPanel linhaInfosT2 = new JPanel(new BorderLayout());
+        linhaInfosT2.add(labelCustoT2, BorderLayout.WEST);
+        linhaInfosT2.add(painelBotoesT2, BorderLayout.EAST);
+        custoT2.add(linhaInfosT2);
         custoT2.add(subPainel);
     }
 
@@ -68,76 +83,90 @@ public class FuncoesPainel {
     public static void InfoTimesPainel (JPanel ladoT1, JPanel ladoT2, JPanel time1, JPanel time2, JPanel meuPainel,
                                         JPanel custoT1, JPanel custoT2){
         ladoT1.add(time1, BorderLayout.NORTH);
-        ladoT1.add(custoT1, BorderLayout.WEST);
+        ladoT1.add(custoT1, BorderLayout.SOUTH);
         ladoT2.add(time2, BorderLayout.NORTH);
-        ladoT2.add(custoT2, BorderLayout.WEST);
+        ladoT2.add(custoT2, BorderLayout.SOUTH);
         meuPainel.add(ladoT1);
         meuPainel.add(ladoT2);
     }
 
-    // CALCULO DO CUSTO (CORAÇÃO DO SOFTWARE)
-    public static double calcularCusto(JComboBox<String>[] dropdownsPerso, JSpinner[] spinnersEidolon,
-                                       List<Personagem> listaPersonagens){
-        double custo = 0.0;
-        for (int i = 0; i<4; i++){
-            String nomeSelecionado = (String) dropdownsPerso[i].getSelectedItem();
-            for (Personagem PersoSelecionado : listaPersonagens){
-                if ((PersoSelecionado.getNome()).equals(nomeSelecionado)){
-                    custo = custo + PersoSelecionado.getCustoBase() + (PersoSelecionado.getCustoEidolon() * (int) spinnersEidolon[i].getValue());
+    public static void ConfigurarAcoesSaveLoad(JComboBox<String>[] dropdownsPersoT1,
+                                               JSpinner[] spinnersEidolonT1,JComboBox<String>[] dropdownsPersoT2,
+                                               JSpinner[] spinnersEidolonT2,JComboBox<String>[] dropdownsConeT1,
+                                               JSpinner[] spinnersConeT1, JComboBox<String>[] dropdownsConeT2,
+                                               JSpinner[] spinnersConeT2, JButton botaoSalvarT1, JButton botaoCarregarT1,
+                                               JButton botaoSalvarT2, JButton botaoCarregarT2){
+        botaoSalvarT1.addActionListener(e -> {
+            JFileChooser explorador = new JFileChooser();
+            int resultado = explorador.showSaveDialog(null);
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                String textoFinal = Utils.StringTimeSalvo(dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1);
+                String caminhoArquivo = explorador.getSelectedFile().getAbsolutePath();
+                try {
+                    java.io.FileWriter escritor = new java.io.FileWriter(caminhoArquivo);
+                    escritor.write(textoFinal);
+                    escritor.close();
+                    JOptionPane.showMessageDialog(null, "Time 1 salvo com sucesso!");
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + erro.getMessage());
                 }
             }
-        }
-        return custo;
-    }
+        });
 
-    public static double calcularExtraCones(JComboBox<String>[] dropdownsCone, JSpinner[] spinnersCone) {
-        double extra = 0;
-        for (int j = 0; j < 4; j++) {
-            String nomeCone = (String) dropdownsCone[j].getSelectedItem();
-            int sobreposicao = (int) spinnersCone[j].getValue();
-            if (nomeCone.contains("Cone T5")) {
-                if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
-                else{extra += 1.0;}
+        botaoSalvarT2.addActionListener(e -> {
+            JFileChooser explorador = new JFileChooser();
+            int resultado = explorador.showSaveDialog(null);
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                String textoFinal = Utils.StringTimeSalvo(dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2);
+                String caminhoArquivo = explorador.getSelectedFile().getAbsolutePath();
+                try {
+                    java.io.FileWriter escritor = new java.io.FileWriter(caminhoArquivo);
+                    escritor.write(textoFinal);
+                    escritor.close();
+                    JOptionPane.showMessageDialog(null, "Time 2 salvo com sucesso!");
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro ao salvar: " + erro.getMessage());
+                }
             }
-            else if (nomeCone.contains("Cone T3")) {
-                extra -= 0.5;
-            }
-            else if (nomeCone.contains("Nada")) {
-                extra -= 1;
-            }
-        }
-        return extra;
-    }
+        });
 
-    public static double valorCustoTotal(List<Personagem> listaPersonagens,JComboBox<String>[] dropdownsPersoT1,
-                                         JSpinner[] spinnersEidolonT1,JComboBox<String>[] dropdownsPersoT2,
-                                         JSpinner[] spinnersEidolonT2,JComboBox<String>[] dropdownsConeT1,
-                                         JSpinner[] spinnersConeT1, JComboBox<String>[] dropdownsConeT2,
-                                         JSpinner[] spinnersConeT2, JLabel labelCustoTotal, JSpinner[] spinnerCustoTotalAdicional) {
+        botaoCarregarT1.addActionListener(e -> {
+            JFileChooser explorador = new JFileChooser();
+            if (explorador.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    String caminhoArquivo = explorador.getSelectedFile().getAbsolutePath();
+                    String[] linhasLidas = Utils.lerLinhasDoArquivo(caminhoArquivo);
+                    if (linhasLidas.length > 0) {
+                        String textoLido = linhasLidas[0];
+                        Utils.carregarStringTime(textoLido, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1);
+                        JOptionPane.showMessageDialog(null, "Time carregado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O arquivo selecionado está vazio.");
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar: " + erro.getMessage());
+                }
+            }
+        });
 
-        double personagensT1 = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-        double personagensT2 = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-        double conesT1 = calcularExtraCones(dropdownsConeT1, spinnersConeT1);
-        double conesT2 = calcularExtraCones(dropdownsConeT2, spinnersConeT2);
-        double extra = (Integer) spinnerCustoTotalAdicional[0].getValue();
-        double custoTimes = personagensT1 + personagensT2 + conesT1 + conesT2 + extra;
-        if (custoTimes < 0) {
-            labelCustoTotal.setForeground(Color.magenta);
-        }
-        else if (custoTimes == 0){
-            labelCustoTotal.setForeground(Color.BLACK);
-        }else if (custoTimes > 0 && custoTimes <= 2) {
-            labelCustoTotal.setForeground(Color.BLUE);
-        } else if (custoTimes > 2 && custoTimes <= 4) {
-            labelCustoTotal.setForeground(new Color(46, 204, 113));
-        } else if (custoTimes > 4 && custoTimes <= 6) {
-            labelCustoTotal.setForeground(Color.ORANGE);
-        } else if (custoTimes > 6 && custoTimes <= 8) {
-            labelCustoTotal.setForeground(Color.RED);
-        } else {
-            labelCustoTotal.setForeground(Color.RED.darker());
-        }
-        return custoTimes;
+        botaoCarregarT2.addActionListener(e -> {
+            JFileChooser explorador = new JFileChooser();
+            if (explorador.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    String caminhoArquivo = explorador.getSelectedFile().getAbsolutePath();
+                    String[] linhasLidas = Utils.lerLinhasDoArquivo(caminhoArquivo);
+                    if (linhasLidas.length > 0) {
+                        String textoLido = linhasLidas[0];
+                        Utils.carregarStringTime(textoLido, dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2);
+                        JOptionPane.showMessageDialog(null, "Time carregado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O arquivo selecionado está vazio.");
+                    }
+                } catch (Exception erro) {
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar: " + erro.getMessage());
+                }
+            }
+        });
     }
 
     public static void custoComposicoes(List<Personagem> listaPersonagens, JComboBox<String>[] dropdownsPersoT1,
@@ -147,7 +176,7 @@ public class FuncoesPainel {
                                         JLabel labelCustoTotal, JLabel[] labelsImagemT1, JLabel[] labelsImagemT2,
                                         JSpinner[] spinnerCustoTotalAdicional) {
         spinnerCustoTotalAdicional[0].addChangeListener(e -> {
-            labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+            labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                     dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                     spinnerCustoTotalAdicional));
         });
@@ -155,10 +184,10 @@ public class FuncoesPainel {
             double soma = 0.0;
             int finalI = i;
             dropdownsPersoT1[i].addActionListener(e -> {
-                double total = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
                 String nomeSelecionado = (String) dropdownsPersoT1[finalI].getSelectedItem();
@@ -166,36 +195,36 @@ public class FuncoesPainel {
             });
 
             spinnersEidolonT1[i].addChangeListener(e -> {
-                double total = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });
 
             dropdownsConeT1[i].addActionListener(e -> {
-                double total = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });
 
             spinnersConeT1[i].addChangeListener(e -> {
-                double total = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });
             dropdownsPersoT2[i].addActionListener(e -> {
-                double total = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
                 String nomeSelecionado = (String) dropdownsPersoT2[finalI].getSelectedItem();
@@ -203,28 +232,28 @@ public class FuncoesPainel {
             });
 
             spinnersEidolonT2[i].addChangeListener(e -> {
-                double total = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });
 
             dropdownsConeT2[i].addActionListener(e -> {
-                double total = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });
 
             spinnersConeT2[i].addChangeListener(e -> {
-                double total = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
-                labelCustoTotal.setText("Custo Total: " + valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
+                labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
                         spinnerCustoTotalAdicional));
             });

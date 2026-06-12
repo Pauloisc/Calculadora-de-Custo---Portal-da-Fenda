@@ -36,6 +36,12 @@ public class Main {
         JSpinner[] spinnerCustoTotalAdicional = new JSpinner[1];
         spinnerCustoTotalAdicional[0] = new JSpinner(new SpinnerNumberModel(0, -100, 100, 1));
 
+        // BOTÃO PARA SALVAR OU CARREGAR TIME
+        JButton botaoSalvarT1 = new JButton("Salvar Time");
+        JButton botaoCarregarT1 = new JButton("Carregar Time");
+        JButton botaoSalvarT2 = new JButton("Salvar Time");
+        JButton botaoCarregarT2 = new JButton("Carregar Time");
+
         // JLABELS PARA NOMEAR CUSTO
         JLabel labelCustoT1 = new JLabel("Custo: 0.0");
         JLabel labelCustoT2 = new JLabel("Custo: 0.0");
@@ -50,7 +56,7 @@ public class Main {
         JPanel meuPainel = new JPanel(new GridLayout(2, 1, 10, 10));
         JPanel time1 = new JPanel(new GridLayout(1, 4));
         JPanel time2 = new JPanel(new GridLayout(1, 4));
-        JPanel custoT1 = new JPanel();
+        JPanel custoT1 = new JPanel(new BorderLayout());
         JPanel custoT2 = new JPanel(new GridLayout(2, 1));
         JPanel custoTotal = new JPanel();
 
@@ -59,8 +65,8 @@ public class Main {
         JPanel ladoT2 = new JPanel(new BorderLayout());
 
         // CRIAÇÃO DA BORDA E TEXTOS
-        FuncoesPainel.BordasTexto (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2,
-                labelCustoTotal, spinnerCustoTotalAdicional);
+        FuncoesPainel.PosicionarBotoes (time1, time2, custoT1, custoT2, labelCustoT1, labelCustoT2,
+                labelCustoTotal, spinnerCustoTotalAdicional, botaoSalvarT1, botaoCarregarT1, botaoSalvarT2, botaoCarregarT2);
 
         // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
         FuncoesPainel.CriarSlots(dropdownsPersoT1, dropdownsPersoT2, dropdownsConeT1, dropdownsConeT2, spinnersEidolonT1,
@@ -68,6 +74,10 @@ public class Main {
 
         // ADICIONA AS INFORMAÇÕES DO TIME NO PAINEL PRINCIPAL
         FuncoesPainel.InfoTimesPainel (ladoT1,ladoT2, time1, time2, meuPainel, custoT1, custoT2);
+
+        //CONFIGURAR BOTÕES PARA SALVAR E CARREGAR COMPOSIÇÕES
+        FuncoesPainel.ConfigurarAcoesSaveLoad(dropdownsPersoT1, spinnersEidolonT1,dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1,
+                spinnersConeT1, dropdownsConeT2, spinnersConeT2, botaoSalvarT1, botaoCarregarT1, botaoSalvarT2, botaoCarregarT2);
 
         // ADICIONA O CALCULO DO CUSTO EM TEMPO REAL
         FuncoesPainel.custoComposicoes(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1, labelCustoT1,
