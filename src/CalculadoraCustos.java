@@ -24,7 +24,7 @@ public class CalculadoraCustos {
             String nomePerso = (String) dropdownsPerso[j].getSelectedItem();
             String nomeCone = (String) dropdownsCone[j].getSelectedItem();
             int sobreposicao = (int) spinnersCone[j].getValue();
-            if (!nomePerso.equals("") && !nomePerso.equals("Nada")) {
+            if (nomePerso != null && !nomePerso.equals("") && !nomePerso.equals("Nada")) {
                 if (nomeCone.contains("Cone T5")) {
                     if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
                     else{extra += 1.0;}
