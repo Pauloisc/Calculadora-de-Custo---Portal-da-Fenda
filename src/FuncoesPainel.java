@@ -23,22 +23,25 @@ public class FuncoesPainel {
     public static void PosicionarBotoes (JPanel time1, JPanel time2, JPanel custoT1, JPanel custoT2,
                                     JLabel labelCustoT1, JLabel labelCustoT2, JLabel labelCustoTotal,
                                     JSpinner[] spinnerCustoTotalAdicional, JButton botaoSalvarT1, JButton botaoCarregarT1,
-                                         JButton botaoSalvarT2, JButton botaoCarregarT2){
+                                         JButton botaoSalvarT2, JButton botaoCarregarT2, JButton botaoLimparT1,
+                                         JButton botaoLimparT2){
         time1.setBorder(BorderFactory.createTitledBorder("Time 1"));
         time2.setBorder(BorderFactory.createTitledBorder("Time 2"));
 
         custoT1.add(labelCustoT1, BorderLayout.WEST);
         JPanel painelBotoesT1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        painelBotoesT1.add(botaoSalvarT1);
+        painelBotoesT1.add(botaoLimparT1);
         painelBotoesT1.add(botaoCarregarT1);
+        painelBotoesT1.add(botaoSalvarT1);
         custoT1.add(painelBotoesT1, BorderLayout.EAST);
 
         JPanel subPainel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         subPainel.add(labelCustoTotal);
         subPainel.add(spinnerCustoTotalAdicional[0]);
         JPanel painelBotoesT2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        painelBotoesT2.add(botaoSalvarT2);
+        painelBotoesT2.add(botaoLimparT2);
         painelBotoesT2.add(botaoCarregarT2);
+        painelBotoesT2.add(botaoSalvarT2);
         JPanel linhaInfosT2 = new JPanel(new BorderLayout());
         linhaInfosT2.add(labelCustoT2, BorderLayout.WEST);
         linhaInfosT2.add(painelBotoesT2, BorderLayout.EAST);
@@ -90,12 +93,13 @@ public class FuncoesPainel {
         meuPainel.add(ladoT2);
     }
 
-    public static void ConfigurarAcoesSaveLoad(JComboBox<String>[] dropdownsPersoT1,
+    public static void ConfigurarAcoesSaveLoadClear(JComboBox<String>[] dropdownsPersoT1,
                                                JSpinner[] spinnersEidolonT1,JComboBox<String>[] dropdownsPersoT2,
                                                JSpinner[] spinnersEidolonT2,JComboBox<String>[] dropdownsConeT1,
                                                JSpinner[] spinnersConeT1, JComboBox<String>[] dropdownsConeT2,
                                                JSpinner[] spinnersConeT2, JButton botaoSalvarT1, JButton botaoCarregarT1,
-                                               JButton botaoSalvarT2, JButton botaoCarregarT2){
+                                               JButton botaoSalvarT2, JButton botaoCarregarT2, JButton botaoLimparT1,
+                                                    JButton botaoLimparT2){
         botaoSalvarT1.addActionListener(e -> {
             JFileChooser explorador = new JFileChooser();
             int resultado = explorador.showSaveDialog(null);
@@ -167,6 +171,24 @@ public class FuncoesPainel {
                 }
             }
         });
+
+        botaoLimparT1.addActionListener(e -> {
+            for (int i = 0; i < 4; i++){
+                dropdownsPersoT1[i].setSelectedItem("");
+                spinnersEidolonT1[i].setValue(0);
+                dropdownsConeT1[i].setSelectedItem("");
+                spinnersConeT1[i].setValue(1);
+            }
+        });
+
+        botaoLimparT2.addActionListener(e -> {
+            for (int i = 0; i < 4; i++){
+                dropdownsPersoT2[i].setSelectedItem("");
+                spinnersEidolonT2[i].setValue(0);
+                dropdownsConeT2[i].setSelectedItem("");
+                spinnersConeT2[i].setValue(1);
+            }
+        });
     }
 
     public static void custoComposicoes(List<Personagem> listaPersonagens, JComboBox<String>[] dropdownsPersoT1,
@@ -185,7 +207,7 @@ public class FuncoesPainel {
             int finalI = i;
             dropdownsPersoT1[i].addActionListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -196,7 +218,7 @@ public class FuncoesPainel {
 
             spinnersEidolonT1[i].addChangeListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -205,7 +227,7 @@ public class FuncoesPainel {
 
             dropdownsConeT1[i].addActionListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -214,7 +236,7 @@ public class FuncoesPainel {
 
             spinnersConeT1[i].addChangeListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT1, spinnersConeT1);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
                 labelCustoT1.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -222,7 +244,7 @@ public class FuncoesPainel {
             });
             dropdownsPersoT2[i].addActionListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -233,7 +255,7 @@ public class FuncoesPainel {
 
             spinnersEidolonT2[i].addChangeListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -242,7 +264,7 @@ public class FuncoesPainel {
 
             dropdownsConeT2[i].addActionListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,
@@ -251,7 +273,7 @@ public class FuncoesPainel {
 
             spinnersConeT2[i].addChangeListener(e -> {
                 double total = CalculadoraCustos.calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-                total += CalculadoraCustos.calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+                total += CalculadoraCustos.calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
                 labelCustoT2.setText("Custo: " + total);
                 labelCustoTotal.setText("Custo Total: " + CalculadoraCustos.valorCustoTotal(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1,
                         dropdownsPersoT2, spinnersEidolonT2,dropdownsConeT1, spinnersConeT1, dropdownsConeT2, spinnersConeT2, labelCustoTotal,

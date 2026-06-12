@@ -18,20 +18,23 @@ public class CalculadoraCustos {
         return custo;
     }
 
-    public static double calcularExtraCones(JComboBox<String>[] dropdownsCone, JSpinner[] spinnersCone) {
+    public static double calcularExtraCones(JComboBox<String>[] dropdownsPerso, JComboBox<String>[] dropdownsCone, JSpinner[] spinnersCone) {
         double extra = 0;
         for (int j = 0; j < 4; j++) {
+            String nomePerso = (String) dropdownsPerso[j].getSelectedItem();
             String nomeCone = (String) dropdownsCone[j].getSelectedItem();
             int sobreposicao = (int) spinnersCone[j].getValue();
-            if (nomeCone.contains("Cone T5")) {
-                if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
-                else{extra += 1.0;}
-            }
-            else if (nomeCone.contains("Cone T3")) {
-                extra -= 0.5;
-            }
-            else if (nomeCone.contains("Nada")) {
-                extra -= 1;
+            if (!nomePerso.equals("") && !nomePerso.equals("Nada")) {
+                if (nomeCone.contains("Cone T5")) {
+                    if (sobreposicao > 1){extra += 1.0 + (0.25 * sobreposicao-0.25);}
+                    else{extra += 1.0;}
+                }
+                else if (nomeCone.contains("Cone T3")) {
+                    extra -= 0.5;
+                }
+                else if (nomeCone.contains("Nada") || nomeCone.isEmpty()) {
+                    extra -= 1;
+                }
             }
         }
         return extra;
@@ -45,8 +48,8 @@ public class CalculadoraCustos {
 
         double personagensT1 = calcularCusto(dropdownsPersoT1, spinnersEidolonT1, listaPersonagens);
         double personagensT2 = calcularCusto(dropdownsPersoT2, spinnersEidolonT2, listaPersonagens);
-        double conesT1 = calcularExtraCones(dropdownsConeT1, spinnersConeT1);
-        double conesT2 = calcularExtraCones(dropdownsConeT2, spinnersConeT2);
+        double conesT1 = calcularExtraCones(dropdownsPersoT1, dropdownsConeT1, spinnersConeT1);
+        double conesT2 = calcularExtraCones(dropdownsPersoT2, dropdownsConeT2, spinnersConeT2);
         double extra = (Integer) spinnerCustoTotalAdicional[0].getValue();
         double custoTimes = personagensT1 + personagensT2 + conesT1 + conesT2 + extra;
         if (custoTimes < 0) {
