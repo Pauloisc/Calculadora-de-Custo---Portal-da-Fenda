@@ -56,7 +56,7 @@ public class CalculadoraCustos {
             labelCustoTotal.setForeground(Color.magenta);
         }
         else if (custoTimes == 0){
-            labelCustoTotal.setForeground(Color.BLACK);
+            labelCustoTotal.setForeground(Color.WHITE);
         }else if (custoTimes > 0 && custoTimes <= 2) {
             labelCustoTotal.setForeground(Color.BLUE);
         } else if (custoTimes > 2 && custoTimes <= 4) {

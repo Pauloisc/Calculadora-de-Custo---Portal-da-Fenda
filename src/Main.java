@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.UIManager;
 
 public class Main {
     public static void main(String[] args) {
+        FuncoesPainel.AmplificarVisual();
         JFrame janela = new JFrame("Portal da Fenda");
-        janela.setSize(1000, 600);
+        janela.setSize(1000, 800);
+        janela.setLocationRelativeTo(null);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //LISTAGEM DOS PERSONAGENS
@@ -43,6 +46,9 @@ public class Main {
         JButton botaoCarregarT2 = new JButton("Carregar Time");
         JButton botaoLimparT1 = new JButton("Limpar Time");
         JButton botaoLimparT2 = new JButton("Limpar Time");
+
+        // COR DOS BOTÕES
+        FuncoesPainel.AmplificarVisualBotoes(botaoSalvarT1, botaoSalvarT2, botaoLimparT1, botaoLimparT2);
 
         // JLABELS PARA NOMEAR CUSTO
         JLabel labelCustoT1 = new JLabel("Custo: 0.0");
@@ -86,6 +92,22 @@ public class Main {
         FuncoesPainel.custoComposicoes(listaPersonagens, dropdownsPersoT1, spinnersEidolonT1, dropdownsConeT1, spinnersConeT1, labelCustoT1,
                 dropdownsPersoT2, spinnersEidolonT2, dropdownsConeT2, spinnersConeT2, labelCustoT2, labelCustoTotal, labelsImagemT1, labelsImagemT2,
                 spinnerCustoTotalAdicional);
+
+        // DEFINIR CORES DOS PAINEIS
+        meuPainel.setBackground(new Color(32, 34, 40));
+        time1.setBackground(new Color(32, 34, 40));
+        time2.setBackground(new Color(32, 34, 40));
+        ladoT1.setOpaque(false);
+        ladoT2.setOpaque(false);
+        custoT1.setBackground(new Color(32, 34, 40));
+        custoT2.setBackground(new Color(32, 34, 40));
+        custoTotal.setBackground(new Color(255, 255, 255));
+
+
+        // DEFINIR CORES DAS FONTES
+        labelCustoT1.setForeground(Color.WHITE);
+        labelCustoT2.setForeground(Color.WHITE);
+        labelCustoTotal.setForeground(Color.WHITE);
 
         // CONFIGS DA JANELA
         janela.add(meuPainel, BorderLayout.CENTER);
