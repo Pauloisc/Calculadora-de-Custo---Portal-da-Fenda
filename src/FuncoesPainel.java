@@ -3,8 +3,28 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import javax.swing.border.TitledBorder;
 
 public class FuncoesPainel {
+    public static void AmplificarVisual (){
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            UIManager.put("ComboBox.font", new Font("Segoe UI", Font.ITALIC, 13));
+            UIManager.put("Spinner.font", new Font("Segoe UI", Font.BOLD, 10));
+            UIManager.put("Button.font", new Font("Segoe UI", Font.BOLD, 10));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void AmplificarVisualBotoes (JButton botaoSalvarT1, JButton botaoSalvarT2,JButton botaoLimparT1,JButton botaoLimparT2){
+        botaoSalvarT1.setBackground(new Color(34, 207, 31));
+        botaoSalvarT2.setBackground(new Color(34, 207, 31));
+        botaoLimparT1.setBackground(new Color(183, 28, 28));
+        botaoLimparT2.setBackground(new Color(183, 28, 28));
+        botaoLimparT1.setForeground(Color.WHITE);
+        botaoLimparT2.setForeground(Color.WHITE);
+    }
     public static void PreencherDropdowns(JComboBox<String>[] dropdownsPersoT1, JComboBox<String>[] dropdownsPersoT2,
                                           JComboBox<String>[] dropdownsConeT1, JComboBox<String>[] dropdownsConeT2,
                                           String[] opcoesPerso, String[] opcoesCone){
@@ -25,8 +45,12 @@ public class FuncoesPainel {
                                     JSpinner[] spinnerCustoTotalAdicional, JButton botaoSalvarT1, JButton botaoCarregarT1,
                                          JButton botaoSalvarT2, JButton botaoCarregarT2, JButton botaoLimparT1,
                                          JButton botaoLimparT2){
-        time1.setBorder(BorderFactory.createTitledBorder("Time 1"));
-        time2.setBorder(BorderFactory.createTitledBorder("Time 2"));
+        TitledBorder bordaT1 = BorderFactory.createTitledBorder("Time 1");
+        bordaT1.setTitleColor(Color.WHITE);
+        time1.setBorder(bordaT1);
+        TitledBorder bordaT2 = BorderFactory.createTitledBorder("Time 2");
+        bordaT2.setTitleColor(Color.WHITE);
+        time2.setBorder(bordaT2);
 
         custoT1.add(labelCustoT1, BorderLayout.WEST);
         JPanel painelBotoesT1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -47,6 +71,11 @@ public class FuncoesPainel {
         linhaInfosT2.add(painelBotoesT2, BorderLayout.EAST);
         custoT2.add(linhaInfosT2);
         custoT2.add(subPainel);
+
+        painelBotoesT1.setOpaque(false);
+        painelBotoesT2.setOpaque(false);
+        subPainel.setOpaque(false);
+        linhaInfosT2.setOpaque(false);
     }
 
     // CRIA UM SLOT PARA CADA COLUNA DE CADA TIME, REFERENTE A PERSONAGEM -> EIDOLON -> CONE DE LUZ -> SOBREPOSICAO
@@ -79,6 +108,10 @@ public class FuncoesPainel {
             slot2.add(spinnersConeT2[i] = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1)));
             time1.add(slot1);
             time2.add(slot2);
+            slot1.setBackground(new Color(32, 34, 40));
+            slot2.setBackground(new Color(32, 34, 40));
+            labelsImagemT1[i].setHorizontalAlignment(SwingConstants.CENTER);
+            labelsImagemT2[i].setHorizontalAlignment(SwingConstants.CENTER);
         }
     }
 
@@ -289,10 +322,16 @@ public class FuncoesPainel {
         textoEditor.addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyReleased(java.awt.event.KeyEvent e) {
+                if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    if (dropdownPerso.getItemCount() > 0) {
+                        dropdownPerso.setSelectedIndex(0);
+                        dropdownPerso.setPopupVisible(false);
+                    }
+                    return;
+                }
+
                 String digitado = textoEditor.getText();
-
                 dropdownPerso.removeAllItems();
-
                 for (String item : listaPersonagens) {
                     if (item.toLowerCase().contains(digitado.toLowerCase())) {
                         dropdownPerso.addItem(item);

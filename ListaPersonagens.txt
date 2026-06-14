@@ -70,6 +70,7 @@ Hook,FundoDoPoco
 Luka,FundoDoPoco
 Lynx,QuebraGalho
 Marco Caca,QuebraGalho
+Mortenax Blade,PilaresDoMeta
 Marco Preservacao,FundoDoPoco
 Misha,FundoDoPoco
 Moze,FundoDoPoco
