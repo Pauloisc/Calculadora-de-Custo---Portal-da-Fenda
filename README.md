@@ -1,6 +1,6 @@
 # Calculadora de Custo — Portal da Fenda
 
-#Aviso!
+# Aviso!
 
 A continuação desta aplicação foi descontinuada em virtude do desenvolvimento dessa mesma para a versão Web. Caso tenha interesse em utilizar a Calculadora de Custo voltada para o evento "Portal da Fenda" mais atual, acesse o repositório [Calculadora de Custo: Portal da Fenda WEB](https://github.com/Pauloisc/Calculadora-de-Custo---Portal-da-Fenda-WEB)
 
