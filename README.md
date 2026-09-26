@@ -1,5 +1,9 @@
 # Calculadora de Custo — Portal da Fenda
 
+#Aviso!
+
+A continuação desta aplicação foi descontinuada em virtude do desenvolvimento dessa mesma para a versão Web. Caso tenha interesse em utilizar a Calculadora de Custo voltada para o evento "Portal da Fenda" mais atual, acesse o repositório (Calculadora de Custo: Portal da Fenda WEB)[https://github.com/Pauloisc/Calculadora-de-Custo---Portal-da-Fenda-WEB]
+
 > Ferramenta desktop em Java para calcular o custo de investimento em personagens, suas eidolons, cones de luz e sobreposições dentro do contexto do evento "Portal da Fenda", um evento de PvP dentro do jogo Honkai Star Rail .
 
 ---
